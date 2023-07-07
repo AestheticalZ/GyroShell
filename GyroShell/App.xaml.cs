@@ -1,9 +1,8 @@
-﻿using Microsoft.UI.Xaml;
+﻿using GyroShell.Settings;
+using Microsoft.UI.Xaml;
 using System;
 using System.IO;
 using Windows.ApplicationModel;
-using GyroShell.Settings;
-using static GyroShell.Helpers.Win32.Win32Interop;
 using Windows.Storage;
 using GyroShell.Helpers;
 using GyroShell.Controls;
@@ -12,14 +11,16 @@ namespace GyroShell
 {
     public partial class App : Application
     {
+        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
+        private Window m_window;
+
         public App()
         {
             this.InitializeComponent();
         }
 
-        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
             m_window.Activate();
@@ -65,7 +66,5 @@ namespace GyroShell
                 AboutPage.PackageBuild = "February, 2023";
             }
         }
-
-        private Window m_window;
     }
 }
